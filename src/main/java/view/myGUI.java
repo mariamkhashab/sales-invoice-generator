@@ -5,6 +5,13 @@
 package view;
 
 import controller.actionHandler;
+import java.util.ArrayList;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import model.header;
+import model.headerTable;
+import model.line;
+import model.lineTable;
 
 /**
  *
@@ -13,6 +20,11 @@ import controller.actionHandler;
 public class myGUI extends javax.swing.JFrame {
 
     private actionHandler handler;
+    private ArrayList<header> headersList;
+    private ArrayList<line> linesList;
+    private headerTable headerTableModel;
+    private lineTable lineTableModel;
+
     /**
      * Creates new form myGUI
      */
@@ -31,7 +43,8 @@ public class myGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        headersTable = new javax.swing.JTable();
+        headersTable.getSelectionModel().addListSelectionListener(this.handler);
         newHeaderbtn = new javax.swing.JButton();
         newHeaderbtn.addActionListener(this.handler);
         deleteHeaderBtn = new javax.swing.JButton();
@@ -41,7 +54,7 @@ public class myGUI extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        linesTable = new javax.swing.JTable();
         newLineBtn = new javax.swing.JButton();
         newLineBtn.addActionListener(this.handler);
         deleteLineBtn = new javax.swing.JButton();
@@ -59,7 +72,7 @@ public class myGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        headersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -70,7 +83,7 @@ public class myGUI extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(headersTable);
 
         newHeaderbtn.setText("New Invoice");
 
@@ -84,7 +97,7 @@ public class myGUI extends javax.swing.JFrame {
 
         jLabel4.setText("Total");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        linesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -95,7 +108,7 @@ public class myGUI extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(linesTable);
 
         newLineBtn.setText("New Line");
 
@@ -233,6 +246,7 @@ public class myGUI extends javax.swing.JFrame {
     private javax.swing.JTextField headerDate;
     private javax.swing.JTextField headerID;
     private javax.swing.JTextField headerTotal;
+    private javax.swing.JTable headersTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -241,8 +255,7 @@ public class myGUI extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable linesTable;
     private javax.swing.JMenuItem loadFile;
     private javax.swing.JButton newHeaderbtn;
     private javax.swing.JButton newLineBtn;
@@ -257,5 +270,80 @@ public class myGUI extends javax.swing.JFrame {
         this.handler = handler;
     }
 
+    public ArrayList<header> getHeadersList() {
+        return headersList;
+    }
+
+    public void setHeadersList(ArrayList<header> headersList) {
+        this.headersList = headersList;
+       this.headerTableModel = new headerTable(this.headersList);
+       this.headerTableModel.fireTableDataChanged();
+        this.headersTable.setModel(headerTableModel);
+    }
+
+    public ArrayList<line> getLinesList() {
+        return linesList;
+    }
+
+    public void setLinesList(ArrayList<line> linesList) {
+        this.linesList = linesList;
+        this.lineTableModel = new lineTable(this.linesList);
+        this.lineTableModel.fireTableDataChanged();
+        this.linesTable.setModel(lineTableModel);
+        
+    }
+
+    public JTable getHeadersTable() {
+        return headersTable;
+    }
+
+    public void setHeadersTable(JTable headersTable) {
+        this.headersTable = headersTable;
+        
+    }
+
+    public JTable getLinesTable() {
+        return linesTable;
+    }
+
+    public void setLinesTable(JTable linesTable) {
+        this.linesTable = linesTable;
+    }
+
+    public JTextField getHeaderCust() {
+        return headerCust;
+    }
+
+    public JTextField getHeaderDate() {
+        return headerDate;
+    }
+
+    public JTextField getHeaderID() {
+        return headerID;
+    }
+
+    public JTextField getHeaderTotal() {
+        return headerTotal;
+    }
+
+    public headerTable getHeaderTableModel() {
+        return headerTableModel;
+    }
+
+    public void setHeaderTableModel(headerTable headerTableModel) {
+        this.headerTableModel = headerTableModel;
+    }
+
+    public lineTable getLineTableModel() {
+        return lineTableModel;
+    }
+
+    public void setLineTableModel(lineTable lineTableModel) {
+        this.lineTableModel = lineTableModel;
+    }
+
+    
+    
+    
 
 }

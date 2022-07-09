@@ -19,13 +19,23 @@ public class header {
     private double total;
     private ArrayList<line> lines;
 
-    public header(int id, Date date, String customer,ArrayList<line> lines) {
+    public header(int id, Date date, String customer) {
         this.id = id;
         this.date = date;
         this.customer = customer;
-        this.lines = lines;
     }
 
+    public static header getHeaderByID(ArrayList<header> list,int id)
+    {
+    for (header temp: list)
+    {
+    if (temp.getId() == id)
+    {
+    return temp;
+    }
+    }
+    return null;
+    }
     public String getCustomer() {
         return customer;
     }
@@ -52,7 +62,7 @@ public class header {
 
     public double getTotal() {
         total=0;
-        for (line l: this.lines)
+        for (line l: this.getLines())
         {
         total+= l.getTotal();
         }
@@ -65,6 +75,10 @@ public class header {
     }
 
     public ArrayList<line> getLines() {
+        if (this.lines == null)
+        {
+        lines = new ArrayList<line>();
+        }
         return lines;
     }
 

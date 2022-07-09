@@ -42,7 +42,7 @@ return this.colNames.length;    }
 line line = this.lineList.get(rowIndex);
         switch(columnIndex){
         case 0:
-                return line.getId();
+                return rowIndex+1;
             case 1:
                 return line.getItem();
             case 2:
