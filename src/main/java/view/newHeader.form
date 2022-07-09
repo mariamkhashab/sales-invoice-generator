@@ -32,9 +32,9 @@
                       <Component id="jTextField3" min="-2" pref="71" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="newHeaderOK" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                      <Component id="newHeaderCancel" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
@@ -73,8 +73,8 @@
               </Group>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="newHeaderOK" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="newHeaderCancel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="154" max="32767" attributes="0"/>
           </Group>
@@ -97,15 +97,23 @@
         <Property name="text" type="java.lang.String" value="Customer"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="newHeaderOK">
       <Properties>
         <Property name="text" type="java.lang.String" value="OK"/>
+        <Property name="actionCommand" type="java.lang.String" value="OK Header"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="newHeaderOK.addActionListener(this.getParent().getHandler()); "/>
+      </AuxValues>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="newHeaderCancel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancel"/>
+        <Property name="actionCommand" type="java.lang.String" value="Cancel Header"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="newHeaderCancel.addActionListener(this.getParent().getHandler()); "/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField1">
     </Component>

@@ -5,6 +5,8 @@
 
 package com.sig;
 
+import view.myGUI;
+
 /**
  *
  * @author Lenovo
@@ -12,6 +14,6 @@ package com.sig;
 public class SIG {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        myGUI demo =new myGUI();
     }
 }

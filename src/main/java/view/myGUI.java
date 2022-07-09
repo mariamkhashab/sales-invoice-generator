@@ -4,16 +4,20 @@
  */
 package view;
 
+import controller.actionHandler;
+
 /**
  *
  * @author Lenovo
  */
 public class myGUI extends javax.swing.JFrame {
 
+    private actionHandler handler;
     /**
      * Creates new form myGUI
      */
     public myGUI() {
+        handler = new actionHandler(this);
         initComponents();
     }
 
@@ -29,7 +33,9 @@ public class myGUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         newHeaderbtn = new javax.swing.JButton();
+        newHeaderbtn.addActionListener(this.handler);
         deleteHeaderBtn = new javax.swing.JButton();
+        deleteHeaderBtn.addActionListener(this.handler);
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -37,7 +43,9 @@ public class myGUI extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         newLineBtn = new javax.swing.JButton();
+        newLineBtn.addActionListener(this.handler);
         deleteLineBtn = new javax.swing.JButton();
+        deleteLineBtn.addActionListener(this.handler);
         headerID = new javax.swing.JTextField();
         headerDate = new javax.swing.JTextField();
         headerCust = new javax.swing.JTextField();
@@ -45,7 +53,9 @@ public class myGUI extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         saveFile = new javax.swing.JMenuItem();
+        saveFile.addActionListener(this.handler);
         loadFile = new javax.swing.JMenuItem();
+        loadFile.addActionListener(this.handler);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -238,4 +248,14 @@ public class myGUI extends javax.swing.JFrame {
     private javax.swing.JButton newLineBtn;
     private javax.swing.JMenuItem saveFile;
     // End of variables declaration//GEN-END:variables
+
+    public actionHandler getHandler() {
+        return handler;
+    }
+
+    public void setHandler(actionHandler handler) {
+        this.handler = handler;
+    }
+
+
 }
