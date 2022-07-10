@@ -86,6 +86,11 @@ public class header {
         this.lines = lines;
     }
 
-    
+    @Override
+    public String toString()
+    {
+        return this.getId() +" "+ this.getDate() +" "+ this.getCustomer();
+                
+    }
     
 }

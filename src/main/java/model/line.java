@@ -69,6 +69,11 @@ public class line {
         this.id = id;
     }
 
-  
+  @Override
+    public String toString()
+    {
+        return this.getHeader().getId()+" "+ this.getItem()+" "+ this.getPrice()+" "+ this.getCount();
+                
+    }
     
 }

@@ -7,9 +7,9 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
-import static java.nio.file.Files.lines;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParseException;
@@ -48,8 +48,16 @@ public class actionHandler implements ActionListener ,ListSelectionListener{
         switch (e.getActionCommand())
         {
             case "Save File":
-                saveFile();
+            {
+                try {
+                    saveFile();
+                } catch (IOException ex) {
+                    Logger.getLogger(actionHandler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
                 break;
+
+                
             case "Load File":
             {
                 try {
@@ -77,12 +85,20 @@ public class actionHandler implements ActionListener ,ListSelectionListener{
                 deleteLine();
                 break;
             case "OK Header":
-                postNewInvoice();
+            {
+                try {
+                    postNewInvoice();
+                } catch (ParseException ex) {
+                    Logger.getLogger(actionHandler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
                 break;
+
             case "Cancel Header":
                 cancelNewHeader();
                 break;  
             case "OK Line":
+                
                 postNewLine();
                 break;
             case "Cancel Line":
@@ -107,10 +123,40 @@ public class actionHandler implements ActionListener ,ListSelectionListener{
         }
     }
 
-    private void saveFile() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    private void saveFile() throws IOException {
+      JFileChooser f = new JFileChooser();
+      int choice = f.showSaveDialog(this.gui);
+      if (choice == JFileChooser.APPROVE_OPTION)
+      {
+      File headerFile = f.getSelectedFile();
+      FileWriter fileWriter = new FileWriter(headerFile);
+      ArrayList<header> headersList = this.gui.getHeadersList();
+      String saveHeaders="";
+      String  saveLines="";
+      
+      for (header header : headersList)
+      {
+      saveHeaders+=header.toString();
+      saveHeaders+="\n";
+        for (line line : header.getLines())
+        {
+        saveLines+=line.toString();
+        saveLines+="\n";
+        }
+      }
+      choice = f.showSaveDialog(this.gui);
+        if (choice == JFileChooser.APPROVE_OPTION)
+        {
+        File linesFile = f.getSelectedFile();
+        FileWriter lineWriter = new FileWriter(linesFile);
+        fileWriter.write(saveHeaders);
+        fileWriter.close();
+        lineWriter.write(saveLines);
+        lineWriter.close();
+      }
+      
+      }
     }
-
     private void loadFile() throws IOException, ParseException {
       JFileChooser f = new JFileChooser();
       int choice = f.showOpenDialog(this.gui);
@@ -192,17 +238,30 @@ public class actionHandler implements ActionListener ,ListSelectionListener{
         int choice = this.gui.getLinesTable().getSelectedRow();
         if (choice != -1)
         {
-            this.gui.getLinesList().remove(choice);
+            line removedLine = this.gui.getLinesList().remove(choice);
             ArrayList<line> tempLineList = this.gui.getLinesList();
             this.gui.setLinesList(tempLineList);
             this.gui.getHeaderTableModel().fireTableDataChanged();
+            //this.gui.getHeadersTable().setRowSelectionInterval(choice, choice);
             this.gui.getLineTableModel().fireTableDataChanged();
-            this.gui.getHeadersTable().setRowSelectionInterval(choice, choice);
+            header header = removedLine.getHeader();
+            this.gui.getHeaderID().setText(String.valueOf(header.getId()));
+            this.gui.getHeaderDate().setText(String.valueOf(header.getDate()));
+            this.gui.getHeaderCust().setText(header.getCustomer());
+            this.gui.getHeaderTotal().setText(String.valueOf(header.getTotal()));
+            
             }
     }
 
-    private void postNewInvoice() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    private void postNewInvoice() throws ParseException {
+
+        int id = Integer.parseInt(this.headerDialog.getInvoiceID().getText());
+        String name = this.headerDialog.getInvoiceCust().getText();
+        Date date =new SimpleDateFormat("dd-MM-yyyy").parse(this.headerDialog.getInvoiceDate().getText());
+        header header = new header(id,date,name);
+        this.gui.getHeadersList().add(header);
+        this.gui.setHeadersList(this.gui.getHeadersList());
+        cancelNewHeader();
     }
 
     private void cancelNewHeader() {
@@ -212,7 +271,34 @@ public class actionHandler implements ActionListener ,ListSelectionListener{
     }
 
     private void postNewLine() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int id=0;
+        int choice = this.gui.getHeadersTable().getSelectedRow();
+        System.out.printf("choice", choice);
+        if (choice!=-1)
+        {
+        header selectedHeader = this.gui.getHeadersList().get(choice);
+        for (line line : selectedHeader.getLines())
+        {
+            if (line.getId()>id)
+                id = line.getId();
+        }
+        id++;  
+        String name = this.lineDialog.getItemName().getText();
+        int count = Integer.parseInt(this.lineDialog.getItemCount().getText());
+        double price = Double.parseDouble(this.lineDialog.getItemPrice().getText());
+        line line = new line(selectedHeader,name,price,count);
+        this.gui.getLinesList().add(line);
+        this.gui.setLinesList(this.gui.getLinesList());
+        this.gui.getHeaderTableModel().fireTableDataChanged();
+        this.gui.getHeaderID().setText(String.valueOf(selectedHeader.getId()));
+        this.gui.getHeaderDate().setText(String.valueOf(selectedHeader.getDate()));
+        this.gui.getHeaderCust().setText(selectedHeader.getCustomer());
+        this.gui.getHeaderTotal().setText(String.valueOf(selectedHeader.getTotal()));    
+        cancelNewLine();
+        }
+ 
+        
+        
     }
 
     private void cancelNewLine() {

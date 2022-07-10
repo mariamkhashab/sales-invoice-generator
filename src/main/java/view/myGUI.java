@@ -290,6 +290,7 @@ public class myGUI extends javax.swing.JFrame {
         this.lineTableModel = new lineTable(this.linesList);
         this.lineTableModel.fireTableDataChanged();
         this.linesTable.setModel(lineTableModel);
+
         
     }
 
