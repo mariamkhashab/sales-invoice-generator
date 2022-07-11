@@ -11,11 +11,11 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Lenovo
  */
-public class lineTable extends AbstractTableModel{
+public class lineTable extends AbstractTableModel {
 
     private ArrayList<line> lineList;
 
-     private String[] colNames = {"ID","Item","Price","Count","Total"};
+    private String[] colNames = {"ID", "Item", "Price", "Count", "Total"};
 
     public lineTable(ArrayList<line> lineList) {
         this.lineList = lineList;
@@ -28,21 +28,23 @@ public class lineTable extends AbstractTableModel{
     public void setLineList(ArrayList<line> lineList) {
         this.lineList = lineList;
     }
-    
+
     @Override
     public int getRowCount() {
-return this.lineList.size();    }
+        return this.lineList.size();
+    }
 
     @Override
     public int getColumnCount() {
-return this.colNames.length;    }
+        return this.colNames.length;
+    }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-line line = this.lineList.get(rowIndex);
-        switch(columnIndex){
-        case 0:
-                return rowIndex+1;
+        line line = this.lineList.get(rowIndex);
+        switch (columnIndex) {
+            case 0:
+                return rowIndex + 1;
             case 1:
                 return line.getItem();
             case 2:
@@ -52,11 +54,12 @@ line line = this.lineList.get(rowIndex);
             case 4:
                 return line.getTotal();
         }
-        return "";    }
-    
+        return "";
+    }
+
     @Override
     public String getColumnName(int column) {
-    switch (column) {
+        switch (column) {
             case 0:
                 return "ID";
             case 1:

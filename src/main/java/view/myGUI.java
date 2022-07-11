@@ -5,7 +5,12 @@
 package view;
 
 import controller.actionHandler;
+import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import model.header;
@@ -20,16 +25,19 @@ import model.lineTable;
 public class myGUI extends javax.swing.JFrame {
 
     private actionHandler handler;
+    
     private ArrayList<header> headersList;
     private ArrayList<line> linesList;
     private headerTable headerTableModel;
     private lineTable lineTableModel;
+    private myGUI frame;
 
     /**
      * Creates new form myGUI
      */
     public myGUI() {
         handler = new actionHandler(this);
+        
         initComponents();
     }
 
@@ -63,6 +71,8 @@ public class myGUI extends javax.swing.JFrame {
         headerDate = new javax.swing.JTextField();
         headerCust = new javax.swing.JTextField();
         headerTotal = new javax.swing.JTextField();
+        exitBtn = new javax.swing.JButton();
+        exitBtn.addActionListener(this.handler);
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         saveFile = new javax.swing.JMenuItem();
@@ -71,13 +81,15 @@ public class myGUI extends javax.swing.JFrame {
         loadFile.addActionListener(this.handler);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         headersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
@@ -99,10 +111,7 @@ public class myGUI extends javax.swing.JFrame {
 
         linesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
@@ -113,6 +122,13 @@ public class myGUI extends javax.swing.JFrame {
         newLineBtn.setText("New Line");
 
         deleteLineBtn.setText("Delete Line");
+
+        exitBtn.setText("Exit");
+        exitBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitBtnActionPerformed(evt);
+            }
+        });
 
         jMenu2.setText("File");
 
@@ -140,25 +156,30 @@ public class myGUI extends javax.swing.JFrame {
                         .addComponent(deleteHeaderBtn)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(headerDate, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addGap(18, 18, 18)
-                            .addComponent(headerID, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(headerTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(headerCust, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 232, Short.MAX_VALUE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(headerTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(headerCust, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 216, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(headerDate, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(headerID, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(exitBtn))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(273, 273, 273)
                 .addComponent(newLineBtn)
@@ -179,7 +200,8 @@ public class myGUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(headerID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(headerID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(exitBtn))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -203,6 +225,15 @@ public class myGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+       // this.addWindowListener(handler);
+    }//GEN-LAST:event_formWindowClosing
+
+    private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_exitBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -234,7 +265,13 @@ public class myGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new myGUI().setVisible(true);
+                
+                myGUI frame = new myGUI();
+                frame.setVisible(true);
+
+                
+             
+    
             }
         });
     }
@@ -242,6 +279,7 @@ public class myGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton deleteHeaderBtn;
     private javax.swing.JButton deleteLineBtn;
+    private javax.swing.JButton exitBtn;
     private javax.swing.JTextField headerCust;
     private javax.swing.JTextField headerDate;
     private javax.swing.JTextField headerID;
@@ -262,6 +300,9 @@ public class myGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem saveFile;
     // End of variables declaration//GEN-END:variables
 
+ 
+    
+     
     public actionHandler getHandler() {
         return handler;
     }
@@ -271,17 +312,34 @@ public class myGUI extends javax.swing.JFrame {
     }
 
     public ArrayList<header> getHeadersList() {
+        try {
+            if (headersList == null) {
+                throw new Exception();
+            }
+        } catch (Exception exp) {
+            JOptionPane.showMessageDialog(this, "No headers to select. Please load a file first", "No data", JOptionPane.CLOSED_OPTION);
+
+        }
         return headersList;
     }
 
     public void setHeadersList(ArrayList<header> headersList) {
         this.headersList = headersList;
-       this.headerTableModel = new headerTable(this.headersList);
-       this.headerTableModel.fireTableDataChanged();
+        this.headerTableModel = new headerTable(this.headersList);
+        this.headerTableModel.fireTableDataChanged();
         this.headersTable.setModel(headerTableModel);
     }
 
     public ArrayList<line> getLinesList() {
+
+        try {
+            if (headersList == null) {
+                throw new Exception();
+            }
+        } catch (Exception exp) {
+            JOptionPane.showMessageDialog(this, "Please select a header first", "No data", JOptionPane.CLOSED_OPTION);
+
+        }
         return linesList;
     }
 
@@ -291,7 +349,6 @@ public class myGUI extends javax.swing.JFrame {
         this.lineTableModel.fireTableDataChanged();
         this.linesTable.setModel(lineTableModel);
 
-        
     }
 
     public JTable getHeadersTable() {
@@ -300,7 +357,7 @@ public class myGUI extends javax.swing.JFrame {
 
     public void setHeadersTable(JTable headersTable) {
         this.headersTable = headersTable;
-        
+
     }
 
     public JTable getLinesTable() {
@@ -342,9 +399,5 @@ public class myGUI extends javax.swing.JFrame {
     public void setLineTableModel(lineTable lineTableModel) {
         this.lineTableModel = lineTableModel;
     }
-
-    
-    
-    
 
 }

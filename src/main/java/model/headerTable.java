@@ -15,12 +15,12 @@ public class headerTable extends AbstractTableModel {
 
     private ArrayList<header> headerList;
 
-     private String[] colNames = {"ID","Date","Customer","Total"};
-    
+    private String[] colNames = {"ID", "Date", "Customer", "Total"};
+
     public headerTable(ArrayList<header> headerList) {
         this.headerList = headerList;
     }
-    
+
     public ArrayList<header> getHeaderList() {
         return headerList;
     }
@@ -28,21 +28,22 @@ public class headerTable extends AbstractTableModel {
     public void setHeaderList(ArrayList<header> headerList) {
         this.headerList = headerList;
     }
-   
-    
+
     @Override
     public int getRowCount() {
-return  this.headerList.size();   }
+        return this.headerList.size();
+    }
 
     @Override
     public int getColumnCount() {
-return this.colNames.length;    }
+        return this.colNames.length;
+    }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         header header = this.headerList.get(rowIndex);
-        switch(columnIndex){
-        case 0:
+        switch (columnIndex) {
+            case 0:
                 return header.getId();
             case 1:
                 return header.getDate();
@@ -53,10 +54,10 @@ return this.colNames.length;    }
         }
         return "";
     }
-    
+
     @Override
     public String getColumnName(int column) {
-    switch (column) {
+        switch (column) {
             case 0:
                 return "ID";
             case 1:

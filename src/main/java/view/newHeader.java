@@ -12,11 +12,12 @@ import javax.swing.JTextField;
  * @author Lenovo
  */
 public class newHeader extends javax.swing.JDialog {
-    
-        
-myGUI parent;
+
+    myGUI parent;
+
     /**
      * Creates new form newHeader
+     *
      * @param parent
      */
     public newHeader(myGUI parent) {
@@ -163,7 +164,7 @@ myGUI parent;
     private javax.swing.JButton newHeaderOK;
     // End of variables declaration//GEN-END:variables
 
-@Override
+    @Override
     public myGUI getParent() {
         return parent;
     }
@@ -195,7 +196,5 @@ myGUI parent;
     public void setInvoiceID(JTextField invoiceID) {
         this.invoiceID = invoiceID;
     }
-
-    
 
 }

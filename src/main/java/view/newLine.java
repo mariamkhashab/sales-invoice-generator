@@ -5,6 +5,7 @@
 package view;
 
 import controller.actionHandler;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -14,6 +15,10 @@ import javax.swing.JTextField;
 public class newLine extends javax.swing.JDialog {
 
     myGUI parent;
+    int vCount = 1;
+    int vName = 1;
+    int vPrice = 1;
+
     /**
      * Creates new form newLine
      */
@@ -171,6 +176,7 @@ public class newLine extends javax.swing.JDialog {
     }
 
     public void setItemCount(JTextField itemCount) {
+
         this.itemCount = itemCount;
     }
 
@@ -190,5 +196,4 @@ public class newLine extends javax.swing.JDialog {
         this.itemPrice = itemPrice;
     }
 
-    
 }

@@ -1,0 +1,19 @@
+PLEASE RUN myGUI.java file. This is the app's entry point.
+
+At exit, click exit button to check save on exit feature
+
+I used copy/paste to rewrite repetitive code snippets
+
+Assumptions:
+-invoice id is unique but not incremental and cannot be negative
+
+Features Implemented:
+-Load file
+-Save file
+-Create new invoice
+-Delete invoice
+-Create new line
+-Delete line
+-All types of exceptions with messages
+-Data validation
+-Save at exit

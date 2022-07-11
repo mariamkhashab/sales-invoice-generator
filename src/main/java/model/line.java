@@ -4,18 +4,19 @@
  */
 package model;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Lenovo
  */
 public class line {
-    
+
     private header header;
     private int id;
     private String item;
     private double price;
     private int count;
-    
 
     public line(header header, String item, double price, int count) {
         this.header = header;
@@ -23,8 +24,7 @@ public class line {
         this.price = price;
         this.count = count;
     }
-    
-    
+
     public header getHeader() {
         return header;
     }
@@ -38,6 +38,7 @@ public class line {
     }
 
     public void setItem(String item) {
+
         this.item = item;
     }
 
@@ -69,11 +70,10 @@ public class line {
         this.id = id;
     }
 
-  @Override
-    public String toString()
-    {
-        return this.getHeader().getId()+" "+ this.getItem()+" "+ this.getPrice()+" "+ this.getCount();
-                
+    @Override
+    public String toString() {
+        return this.getHeader().getId() + " " + this.getItem() + " " + this.getPrice() + " " + this.getCount();
+
     }
-    
+
 }

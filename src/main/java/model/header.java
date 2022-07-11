@@ -12,7 +12,7 @@ import java.util.Date;
  * @author Lenovo
  */
 public class header {
-    
+
     private int id;
     private Date date;
     private String customer;
@@ -25,17 +25,15 @@ public class header {
         this.customer = customer;
     }
 
-    public static header getHeaderByID(ArrayList<header> list,int id)
-    {
-    for (header temp: list)
-    {
-    if (temp.getId() == id)
-    {
-    return temp;
+    public static header getHeaderByID(ArrayList<header> list, int id) {
+        for (header temp : list) {
+            if (temp.getId() == id) {
+                return temp;
+            }
+        }
+        return null;
     }
-    }
-    return null;
-    }
+
     public String getCustomer() {
         return customer;
     }
@@ -61,12 +59,11 @@ public class header {
     }
 
     public double getTotal() {
-        total=0;
-        for (line l: this.getLines())
-        {
-        total+= l.getTotal();
+        total = 0;
+        for (line l : this.getLines()) {
+            total += l.getTotal();
         }
-        
+
         return total;
     }
 
@@ -75,9 +72,8 @@ public class header {
     }
 
     public ArrayList<line> getLines() {
-        if (this.lines == null)
-        {
-        lines = new ArrayList<line>();
+        if (this.lines == null) {
+            lines = new ArrayList<line>();
         }
         return lines;
     }
@@ -87,10 +83,9 @@ public class header {
     }
 
     @Override
-    public String toString()
-    {
-        return this.getId() +" "+ this.getDate() +" "+ this.getCustomer();
-                
+    public String toString() {
+        return this.getId() + " " + this.getDate() + " " + this.getCustomer();
+
     }
-    
+
 }
